@@ -35,7 +35,7 @@ include 'koneksi.php';
     <head>
         <meta charset="utf-8"/>
         <title>sign_up</title>
-        <link rel="stylesheet" type="text/css" href="sign-up style.css"
+        <link rel="stylesheet" type="text/css" href="css//sign-up style.css"
     </head>
     <body>
         <div id="login-box">
@@ -57,5 +57,5 @@ include 'koneksi.php';
         <div class="right-b">
             <h2> WELCOME </h2>
         </div>
-
+    </body>
 </html>
