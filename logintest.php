@@ -24,7 +24,7 @@
                     <input type="submit" name="input" value="login">
                 </div>
                 <div class="signup-link">
-                    don't have an account yet?<a href="registerfrom.php">sign up now</a>
+                    don't have an account yet?<a href="regtestfrom.php">sign up now</a>
                 </div>
             </from>
         </div>

@@ -1,12 +1,10 @@
 <?php
-
+    
     include 'koneksi.php';
+    $username=$_POST['username'];
+    $password=$_POST['password'];
 
-    if(isset($_POST['input'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $data = mysqli_query($koneksi,"SELECT * FROM users WHERE username='".$username."' AND password='".$password."'");
+        $data = mysqli_query($koneksi,"SELECT * FROM users WHERE username='$username' AND password='$password'");
 
 
         if(mysqli_num_rows($data)){
@@ -14,5 +12,4 @@
         }else{
             echo "wrong username/password";
         }
-    }
 ?>
