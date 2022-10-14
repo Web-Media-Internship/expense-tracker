@@ -1,6 +1,12 @@
 <?php
-    $koneksi = mysqli_connect('localhost', 'root', '', 'expensetracker');
+    
+    $host = "localhost";
+    $user = "root";
+    $pw = "";
+    $db = "expensetracker";
+
+    $koneksi = mysqli_connect($host, $user, $pw, $db);
     if(!$koneksi){
-        echo "tgagal";
+        echo "gagal terhubung";
     }
-    ?>
+?>
