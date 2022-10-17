@@ -29,6 +29,7 @@ h1{
     font-size: 28px;
 }
 input[type="text"],
+input[type="email"],
 input[type="password"]{
     display: block;
     box-sizing: border-box;
