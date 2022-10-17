@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="css-style//signup-style.css">
+    <title>hi</title>
+    <link rel="stylesheet" type="text/css" href="css-style//regfrom-style.css">
 </head>
 
 <body>

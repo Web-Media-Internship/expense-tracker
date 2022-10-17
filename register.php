@@ -4,6 +4,7 @@ if(isset($_POST['register'])){
     if(registrasi($_POST) > 0) {
         echo "<script>
         alert('successful');
+        window.location= 'login.php';
         </script>";
     } else {
         echo mysqli_error($koneksi);
@@ -16,13 +17,13 @@ if(isset($_POST['register'])){
 
 <head>
     <title>Register</title>
-    <link rel="stylesheet" type="text/css" href="css-style//signup-style.css">
+    <link rel="stylesheet" type="text/css" href="css-style//regfrom-style.css">
 </head>
 
 <body>
     <div id="login-box">
-        <h1>Register</h1>
         <div class="signup-box">
+        <h1>REGISTER</h1>
         <form action="" method="POST">
         <div class="register">
             <input type="text" name="name" placeholder="name" require="">
