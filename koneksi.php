@@ -25,7 +25,14 @@
                 </script>";
                 return false;
             }
-        
+        $em = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$email'");
+        if(mysqli_fetch_assoc($em)){
+            echo "<script>
+                alert('email has been add');
+            </script>";
+            return false;
+        }
+
         if ($password != $password2) {
             echo "<script>
                 alert('ceck your confirm password');
