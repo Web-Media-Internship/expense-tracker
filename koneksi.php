@@ -28,7 +28,7 @@
         $em = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$email'");
         if(mysqli_fetch_assoc($em)){
             echo "<script>
-                alert('email has been add');
+                alert('email already used');
             </script>";
             return false;
         }
