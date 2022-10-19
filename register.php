@@ -26,12 +26,12 @@ if(isset($_POST['register'])){
         <h1>REGISTER</h1>
         <form action="" method="POST">
         <div class="register">
-            <input type="text" name="name" placeholder="name" require="">
-            <input type="text" name="usn" placeholder="username" require="">
-            <input type="email" name="email" placeholder="email" require="">
-            <input type="password" name="pw" placeholder="password" require="">
-            <input type="password" name="pw2" placeholder="confirm password" require="">
-            <input type="submit" name="register" value="SIGNUP" require="">
+            <input type="text" name="name" placeholder="name" required>
+            <input type="text" name="usn" placeholder="username" required>
+            <input type="email" name="email" placeholder="email" required>
+            <input type="password" name="pw" placeholder="password" required>
+            <input type="password" name="pw2" placeholder="confirm password" required>
+            <input type="submit" name="register" value="SIGNUP">
         </div>
         <div class="signup-link">
             already have an account?<a href="login.php">login</a>
