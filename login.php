@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(isset($_SESSION["login"])){
+    header("location: mainmenu.php");
+    exit;
+}
 require 'koneksi.php';
 if(isset($_POST['login'])){
     $usn = $_POST['usn'];
@@ -9,6 +14,7 @@ if(isset($_POST['login'])){
 
             $row = mysqli_fetch_assoc($result);
             if(password_verify($pw, $row["password"])){
+                $_SESSION["login"]=true;
                 header("location: mainmenu.php");
                 exit;
             }

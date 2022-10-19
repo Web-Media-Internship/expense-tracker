@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION["login"])){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +27,7 @@
             <li><a href="">Wallets</a></li>
             <li><a href="">Transaction</a></li>
             <li><a href="">Statement</a></li>
-            <li><a href="">Setting</a></li>
+            <li><a href="logout.php">logout</a></li>
         </ul>
     </nav>
 </body>
