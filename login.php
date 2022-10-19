@@ -33,8 +33,8 @@ if(isset($_POST['login'])){
             <?php endif; ?>
         <form action="" method="POST">
         <div class="register">
-            <input type="text" name="usn" placeholder="username">
-            <input type="password" name="password" placeholder="password">
+            <input type="text" name="usn" placeholder="username" required>
+            <input type="password" name="password" placeholder="password" required>
             <div class="signup-link">
                 <a href="fpass.php">forgot password?</a>
             </div>
