@@ -1,13 +1,12 @@
 <?php
 include 'koneksi.php';
 session_start();
-
-$qtb = mysqli_query($koneksi, "SELECT code,transactions_name,mutation,amount,date,description FROM transactions");
-
 if(!isset($_SESSION["login"])){
     header("location: login.php");
     exit;
 }
+$qtb = mysqli_query($koneksi, "SELECT code,transactions_name,mutation,amount,date,description FROM transactions");
+
 ?>
 
 <!DOCTYPE html>
