@@ -15,7 +15,7 @@ if(isset($_POST['login'])){
             $row = mysqli_fetch_assoc($result);
             if(password_verify($pw, $row["password"])){
                 $_SESSION["login"]=true;
-                header("location: mainmenu.php");
+                header("location: transaction.php");
                 exit;
             }
         }
