@@ -1,8 +1,10 @@
 <?php
-include 'head_menu.php';
-$qtb = mysqli_query($koneksi, "SELECT code,transactions_name,mutation,amount,date,description FROM transactions");
-?>
+include '../menu_control/php_menu.php';
 
+$qtb = mysqli_query($koneksi, "SELECT * FROM transactions WHERE users_id = '$idu'");
+?>
+<?php include '../menu_control/head_menu.php'; ?>
+<?php include '../menu_control/first_body.php'; ?>
 
 <div class="cont">
     <h3>Your Transaction</h3>
@@ -14,19 +16,27 @@ $qtb = mysqli_query($koneksi, "SELECT code,transactions_name,mutation,amount,dat
             <th>amount</th>
             <th>description</th>
             <th>date</th>
+            <th>action</th>
         </tr>
         <?php while($row = mysqli_fetch_assoc($qtb)):?>
         <tbody>
             <tr>
                 <td><?=$row["code"];?></td>
-                <td><?=$row["transactions_name"];?></td>
+                <td><?=$row["name"];?></td>
                 <td><?=$row["mutation"];?></td>
                 <td><?=$row["amount"];?></td>
                 <td><?=$row["description"];?></td>
                 <td><?=$row["date"];?></td>
+                <td>
+                    <a href="edit.php?id=<?=$row["id"];?>">edit</a> |
+                    <a href="del.php?id=<?=$row["id"];?>">delete</a>
+                </td>
             </tr>
         </tbody>
         <?php endwhile; ?>
     </table>
+    <div>
+        <a href="new_tr.php" name="add">make a new transaction</a>  
+    </div>
 </div>
-<?php include 'end_menu.php'; ?>
+<?php include '../menu_control/end_body.php'; ?>

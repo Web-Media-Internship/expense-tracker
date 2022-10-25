@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION["login"])){
-    header("location: transaction.php");
+    header("location: menu/transaction.php");
     exit;
 }
 require 'koneksi.php';
@@ -15,7 +15,8 @@ if(isset($_POST['login'])){
             $row = mysqli_fetch_assoc($result);
             if(password_verify($pw, $row["password"])){
                 $_SESSION["login"]=true;
-                header("location: transaction.php");
+                $_SESSION["id_user"]= $row['id'];
+                header("location: menu/transaction.php");
                 exit;
             }
         }

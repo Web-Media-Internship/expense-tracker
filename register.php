@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include 'function.php';
 if(isset($_POST['register'])){
     if(registrasi($_POST) > 0) {
         echo "<script>
@@ -10,7 +10,7 @@ if(isset($_POST['register'])){
         echo mysqli_error($koneksi);
     }
 
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
