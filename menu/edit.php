@@ -34,11 +34,11 @@ if(isset($_POST['ed'])){
         <div class="register">
             <input type="hidden" name="id" value="<?=$edt["id"];?>">
             <ul>
-                <li><input type="text" name="name" placeholder="name" required value="<?=$edt["name"];?>"></li>
-                <li><input type="text" name="mtn" placeholder="mutation" required value="<?=$edt["mutation"];?>"></li>
-                <li><input type="text" name="amn" placeholder="amount" required value="<?=$edt["amount"];?>"></li>
-                <li><input type="text" name="desc" placeholder="description" required value="<?=$edt["description"];?>"></li>
-                <li><input type="text" name="date" placeholder="date" required value="<?=$edt["date"];?>"></li>
+                <li>Name<div><input type="text" name="name" placeholder="name" required value="<?=$edt["name"];?>"></li>
+                <li>Mutation<div><input type="text" name="mtn" placeholder="mutation" required value="<?=$edt["mutation"];?>"></li>
+                <li>Amount<div><input type="text" name="amn" placeholder="amount" required value="<?=$edt["amount"];?>"></li>
+                <li>Description<div><input type="text" name="desc" placeholder="description" value="<?=$edt["description"];?>"></li>
+                <li>Date <div><input type="text" name="date" placeholder="date" value="<?=$edt["date"];?>"></li>
                 <li><input type="submit" name="ed" value="edit"></li>
             </ul>
         </div>

@@ -26,11 +26,11 @@ if(isset($_POST['add'])){
     <form action="" method="POST">
         <div class="register">
             <ul>
-                <li><input type="text" name="name" placeholder="name" required></li>
-                <li><input type="text" name="mtn" placeholder="mutation" required></li>
-                <li><input type="text" name="amn" placeholder="amount" required></li>
-                <li><input type="text" name="desc" placeholder="description" required></li>
-                <li><input type="text" name="date" placeholder="date" required value="0000-00-00 00:00:00"></li>
+                <li>Name<div><input type="text" name="name" placeholder="name" required></li>
+                <li>Mutation<div><input type="text" name="mtn" placeholder="mutation" required></li>
+                <li>Amount<div><input type="text" name="amn" placeholder="amount" required></li>
+                <li>Description<div><input type="text" name="desc" placeholder="description" required></li>
+                <li>Date<div><input type="text" name="date" placeholder="date" required value="0000-00-00 00:00:00"></li>
                 <li><input type="submit" name="add" value="add"></li>
             </ul>
         </div>

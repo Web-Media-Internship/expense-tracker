@@ -29,7 +29,8 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM transactions WHERE users_id = '$idu
                 <td><?=$row["date"];?></td>
                 <td>
                     <a href="edit.php?id=<?=$row["id"];?>">edit</a> |
-                    <a href="del.php?id=<?=$row["id"];?>">delete</a>
+                    <a href="del.php?id=<?=$row["id"];?>" onclick="
+                        return confirm('want to delete this transaction');">delete</a>
                 </td>
             </tr>
         </tbody>
