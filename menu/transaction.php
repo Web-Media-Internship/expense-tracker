@@ -1,7 +1,8 @@
 <?php
 include '../menu_control/php_menu.php';
 
-$qtb = mysqli_query($koneksi, "SELECT * FROM transactions WHERE users_id = '$idu'");
+$qtb = mysqli_query($koneksi, "SELECT * FROM transactions, mutation WHERE transactions.users_id = '$idu'
+    AND transactions.mutation = mutation.mt_id");
 ?>
 <?php include '../menu_control/head_menu.php'; ?>
 <?php include '../menu_control/first_body.php'; ?>
@@ -23,7 +24,7 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM transactions WHERE users_id = '$idu
             <tr>
                 <td><?=$row["code"];?></td>
                 <td><?=$row["name"];?></td>
-                <td><?=$row["mutation"];?></td>
+                <td><?=$row["mt_name"];?></td>
                 <td><?=$row["amount"];?></td>
                 <td><?=$row["description"];?></td>
                 <td><?=$row["date"];?></td>

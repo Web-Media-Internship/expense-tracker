@@ -15,7 +15,7 @@ function tambah($data){
     global $koneksi;
     global $idu;
     $name = htmlspecialchars($data["name"]);
-    $mtn = htmlspecialchars($data["mtn"]);
+    $mtn = htmlspecialchars($data["id"]);
     $amn = htmlspecialchars($data["amn"]);
     $desc = htmlspecialchars($data["desc"]);
     $date = htmlspecialchars($data["date"]);
@@ -36,7 +36,7 @@ function edit($data){
     global $koneksi;
     $id = $data["id"];
     $name = htmlspecialchars($data["name"]);
-    $mtn = htmlspecialchars($data["mtn"]);
+    $mtn = htmlspecialchars($data["mt"]);
     $amn = htmlspecialchars($data["amn"]);
     $desc = htmlspecialchars($data["desc"]);
     $date = htmlspecialchars($data["date"]);
