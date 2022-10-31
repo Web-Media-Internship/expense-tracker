@@ -7,7 +7,7 @@ $edt = query("SELECT * FROM transactions WHERE id = $idt")[0];
 
 
 
-if(isset($_POST['nw'])){
+if(isset($_POST['ed'])){
     if(edit($_POST) > 0){
         echo "<script>
         alert('Transaction edited');
@@ -34,11 +34,20 @@ if(isset($_POST['nw'])){
         <div class="register">
             <input type="hidden" name="id" value="<?=$edt["id"];?>">
             <ul>
+                <li>wallet<div>
+                    <select name="wlt" required>
+                        <?php
+                            $qtb = mysqli_query($koneksi, "SELECT * FROM wallets");
+                            while ($row = mysqli_fetch_assoc($qtb)){
+                                echo "<option value = '$row[id]'>$row[name]</option>";
+                            }
+                        ?>
+                    </select>
+                </li>
                 <li>Name<div><input type="text" name="name" placeholder="name" required value="<?=$edt["name"];?>"></li>
                 <li>Mutation<div>
                     <select name="mt" required>
                         <?php
-                            $edt["mutation"];
                             $qtb = mysqli_query($koneksi, "SELECT * FROM mutation");
                             while ($row = mysqli_fetch_assoc($qtb)){
                                 echo "<option value = '$row[mt_id]'>$row[mt_name]</option>";

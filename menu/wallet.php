@@ -13,7 +13,7 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM wallets WHERE wallet_groups_id = '$
         </ul>
     </nav>
     <div class="cont">
-        <h3>wallet Group</h3>
+        <h3> </h3>
         <table border="1" cellpadding="10" cellspacing="0" class="tb1">
             <tr>
                 <th>Wallet</th>
@@ -24,12 +24,12 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM wallets WHERE wallet_groups_id = '$
             <?php while($row = mysqli_fetch_assoc($qtb)):?>
             <tbody>
                 <tr>
-                    <td><?=$row["name"];?></td>
+                    <td><?=$row["wl_name"];?></td>
                     <td><?=$row["description"];?></td>
                     <td><?=$row["is_active"];?></td>
                     <td>
-                        <a href="wallet_group/?id=<?=$row["id"];?>">OPEN</a> |
-                        <a href="wallet_group/?id=<?=$row["id"];?>" onclick="
+                        <a href="wdt.php?id=<?=$row["id"];?>">OPEN</a> |
+                        <a href="delw2.php?id=<?=$row["id"];?>" onclick="
                         return confirm('want to delete this transaction');">delete</a>
                     </td>
                 </tr>

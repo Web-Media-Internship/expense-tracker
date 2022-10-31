@@ -19,15 +19,15 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM wallet_groups WHERE users_id = '$id
                 <td><?=$row["is_active"];?></td>
                 <td>
                     <a href="wallet.php?id=<?=$row["id"];?>">OPEN</a> |
-                    <a href="wallet_group/delete.php?id=<?=$row["id"];?>" onclick="
-                        return confirm('want to delete this transaction');">delete</a>
+                    <a href="delw.php?id=<?=$row["id"];?>" onclick="
+                        return confirm('want to delete this wallet group');">delete</a>
                 </td>
             </tr>
         </tbody>
         <?php endwhile; ?>
     </table>
     <div>
-        <a href="new_wl.php" name="add">make a new wallet</a>  
+        <a href="new_wg.php" name="add">make a new wallet</a>  
     </div>
 </div>
 <?php include '../menu_control/end_body.php'; ?>

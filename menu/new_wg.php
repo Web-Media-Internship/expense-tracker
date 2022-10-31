@@ -1,15 +1,14 @@
 <?php 
 include 'function.php';
-$iwg = $_GET['id'];
 if(isset($_POST['add'])){
-    if(tamwl($_POST) > 0){
+    if(tamwg($_POST) > 0){
         echo "<script>
-        alert('Wallet added successfully');
-        window.location = 'wallet.php?id=$iwg';
+        alert('Wallet group added successfully');
+        window.location = 'wallet_group.php';
         </script>";
     } else {
         echo "<script>
-        alert('failed Wallet added');
+        alert('failed Wallet group added');
         </script>";
     }
 }
@@ -18,7 +17,7 @@ if(isset($_POST['add'])){
 <body>
     <nav>
         <div class="logo">
-            <h1>NEW WALLET</h1>
+            <h1>NEW WALLET GROUP</h1>
         </div>
         <ul>
             <li><a href="wallet.php">back</a></li>
@@ -29,7 +28,6 @@ if(isset($_POST['add'])){
         <div class="register">
             <ul>
                 <li>Name<div><input type="text" name="name" placeholder="name" required></li>
-                <li>Description<div><input type="text" name="desc" placeholder="description" required></li>
                 <li><input type="submit" name="add" value="add"></li>
             </ul>
         </div>

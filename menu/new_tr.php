@@ -26,6 +26,16 @@ if(isset($_POST['add'])){
     <form action="" method="POST">
         <div class="register">
             <ul>
+                <li>wallet<div>
+                    <select name="wlt" required>
+                        <?php
+                            $qtb = mysqli_query($koneksi, "SELECT * FROM wallets");
+                            while ($row = mysqli_fetch_assoc($qtb)){
+                                echo "<option value = '$row[id]'>$row[name]</option>";
+                            }
+                        ?>
+                    </select>
+                </li>
                 <li>Name<div><input type="text" name="name" placeholder="name" required></li>
                 <li>Mutation<div>
                     <select name="id" required>
