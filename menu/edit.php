@@ -6,7 +6,6 @@ $idt = $_GET['id'];
 $edt = query("SELECT * FROM transactions WHERE id = $idt")[0];
 
 
-
 if(isset($_POST['ed'])){
     if(edit($_POST) > 0){
         echo "<script>
@@ -37,9 +36,9 @@ if(isset($_POST['ed'])){
                 <li>wallet<div>
                     <select name="wlt" required>
                         <?php
-                            $qtb = mysqli_query($koneksi, "SELECT * FROM wallets");
+                            $qtb = mysqli_query($koneksi, "SELECT * FROM wallet_groups, wallets WHERE wallet_groups.users_id=$idu and wallets.wallet_groups_id=wallet_groups.id");
                             while ($row = mysqli_fetch_assoc($qtb)){
-                                echo "<option value = '$row[id]'>$row[name]</option>";
+                                echo "<option value = '$row[wid]'>$row[wl_name]</option>";
                             }
                         ?>
                     </select>

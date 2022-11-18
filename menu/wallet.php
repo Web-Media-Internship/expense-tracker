@@ -1,6 +1,7 @@
 <?php include '../menu_control/php_menu.php';
 $iwg = $_GET['id'];
 $qtb = mysqli_query($koneksi, "SELECT * FROM wallets WHERE wallet_groups_id = '$iwg'");
+$qtg = mysqli_query($koneksi, "SELECT * FROM wallet_groups WHERE id = '$iwg'");
 ?>
 <?php include '../menu_control/head_menu.php';?>
 <body>
@@ -13,7 +14,9 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM wallets WHERE wallet_groups_id = '$
         </ul>
     </nav>
     <div class="cont">
-        <h3> </h3>
+        <?php while($row = mysqli_fetch_assoc($qtg)):?>
+        <h3><?=$row["name"];?></h3>
+        <?php endwhile; ?>
         <table border="1" cellpadding="10" cellspacing="0" class="tb1">
             <tr>
                 <th>Wallet</th>
@@ -25,11 +28,11 @@ $qtb = mysqli_query($koneksi, "SELECT * FROM wallets WHERE wallet_groups_id = '$
             <tbody>
                 <tr>
                     <td><?=$row["wl_name"];?></td>
-                    <td><?=$row["description"];?></td>
+                    <td><?=$row["wdesc"];?></td>
                     <td><?=$row["is_active"];?></td>
                     <td>
-                        <a href="wdt.php?id=<?=$row["id"];?>">OPEN</a> |
-                        <a href="delw2.php?id=<?=$row["id"];?>" onclick="
+                        <a href="wdt.php?id=<?=$row["wid"];?>">edit</a> |
+                        <a href="delw2.php?id=<?=$row["wid"];?>" onclick="
                         return confirm('want to delete this transaction');">delete</a>
                     </td>
                 </tr>

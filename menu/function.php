@@ -69,8 +69,9 @@ function tamwg($data){
 function delw($id){
     global $koneksi;
 
-    mysqli_query($koneksi, "DELETE FROM wallet_groups,wallets WHERE wallet_groups.id = $id, 
-    wallets.wallet_groups_id = $id");
+    mysqli_query($koneksi, "DELETE FROM wallet_groups WHERE id = $id");
+    mysqli_query($koneksi, "DELETE FROM wallets WHERE wallet_groups_id = $id");
+    
     return mysqli_affected_rows($koneksi);
 }
 
@@ -89,10 +90,25 @@ function tamwl($data){
     mysqli_query($koneksi, $inq);
     return mysqli_affected_rows($koneksi);
 }
+
+function edwl($data){
+    global $koneksi;
+    $id = $data["id"];
+    $name = htmlspecialchars($data["name"]);
+    $desc = htmlspecialchars($data["desc"]);
+    $inq = "UPDATE wallets SET
+                wl_name = '$name',
+                wdesc = '$desc'
+            WHERE wid = '$id'";
+    mysqli_query($koneksi, $inq);
+    return mysqli_affected_rows($koneksi);
+}
+
+    
 function delw2($id){
     global $koneksi;
 
-    mysqli_query($koneksi, "DELETE FROM wallets WHERE id = $id");
+    mysqli_query($koneksi, "DELETE FROM wallets WHERE wid = $id");
     return mysqli_affected_rows($koneksi);
 }
 

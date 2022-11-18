@@ -7,7 +7,6 @@ if (delw2($id)>0){
     alert('wallet deleted');
     window.location = 'wallet_group.php';
     </script>";
-    
 }else{
     echo "<script>
     alert('wallet failed to delete');

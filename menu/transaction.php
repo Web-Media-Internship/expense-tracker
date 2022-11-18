@@ -2,7 +2,7 @@
 include '../menu_control/php_menu.php';
 
 $qtb = mysqli_query($koneksi, "SELECT * FROM transactions, wallets, mutation WHERE transactions.users_id = '$idu'
-    AND transactions.mutation = mutation.mt_id AND transactions.wallets_id = wallets.id");
+    AND transactions.mutation = mutation.mt_id AND transactions.wallets_id = wallets.wid");
 ?>
 <?php include '../menu_control/head_menu.php'; ?>
 <?php include '../menu_control/first_body.php'; ?>

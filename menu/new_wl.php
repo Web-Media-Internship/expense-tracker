@@ -5,11 +5,12 @@ if(isset($_POST['add'])){
     if(tamwl($_POST) > 0){
         echo "<script>
         alert('Wallet added successfully');
-        window.location = 'wallet.php?id=$iwg';
+        window.location = 'wallet_group.php';
         </script>";
     } else {
         echo "<script>
         alert('failed Wallet added');
+        window.location = 'wallet_group.php';
         </script>";
     }
 }
