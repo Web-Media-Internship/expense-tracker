@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WalletGroupController;
 
 
 /*
@@ -19,13 +20,18 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::get('/', [TransactionController::class, 'index'])->middleware('auth');
-
-Route::get('/wallet', [WalletController::class, 'index'])->middleware('auth');
-
+// login & register route
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+//transaction route
+Route::get('/', [TransactionController::class, 'index'])->middleware('auth');
+
+//wallet reoute
+Route::resource('/walletgroup', WalletGroupController::class)->middleware('auth');
+
+Route::resource('/wallet', WalletController::class)->except('index')->middleware('auth');

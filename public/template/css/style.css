@@ -1,0 +1,58 @@
+.lonf {
+    display: flex;
+    position: relative;
+    padding: 4.5px 0;
+    cursor: pointer;
+}
+
+.onof {
+    appearance: none;
+    display: none;
+}
+
+.obg {
+    position: relative;
+    display: block;
+    background: linear-gradient(to bottom, rgb(116, 115, 155), rgb(180, 42, 42));
+    width: 50px;
+    height: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 15px rgba(219, 45, 45, 0.3);
+}
+
+.act {
+    position: absolute;
+    background: #208d20;
+    top: 2px;
+    left: -2px;
+    width: 25px;
+    height: 25px;
+    border-radius: 25%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+.onof:checked~.act {
+    left: 27.5px;
+}
+
+.onof:checked~.obg {
+    background: linear-gradient(to bottom, rgb(140, 92, 252), rgb(88, 89, 97));
+}
+
+.act::before {
+    content: '';
+    position: absolute;
+    background: rgb(102, 14, 14);
+    top: 30%;
+    left: 30%;
+    transform: translate(-25%, -25%);
+    width: 19px;
+    height: 19px;
+    border-radius: 25%;
+    transform: 0.1s;
+}
+
+.onof:checked~.act::before {
+    background: rgb(73, 170, 73);
+}

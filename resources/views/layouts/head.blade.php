@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -49,8 +50,8 @@
                     <i class="bi bi-grid-1x2"></i>
                     <span>Transaction</span></a>
             </li>
-            <li class="nav-item {{ Request::is('wallet') ? 'active' : '' }}">
-                <a class="nav-link" href="/wallet">
+            <li class="nav-item {{ Request::is('walletgroup') ? 'active' : '' }}">
+                <a class="nav-link" href="/walletgroup">
                     <i class="bi bi-wallet2"></i>
                     <span>Wallet</span></a>
             </li>
@@ -71,9 +72,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="">Buttons</a>
-                        <a class="collapse-item" href="">Cards</a>
+                        <a class="collapse-item" href="">Profil Setting</a>
+                        <a class="collapse-item" href="">Change Password</a>
                     </div>
                 </div>
             </li>

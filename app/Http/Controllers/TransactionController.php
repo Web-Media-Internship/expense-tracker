@@ -9,9 +9,9 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        return view('trsn', [
+        return view('transaction.trsn', [
             "title" => "Transaction",
-            "trn" => Transaction::all()
+            "trn" => Transaction::where('user_id', auth()->user()->id)->get()
         ]);
     }
 }
