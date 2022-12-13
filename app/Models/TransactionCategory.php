@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wallet extends Model
+class TransactionCategory extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-    
-    public function walletgroup()
-    {
-        return $this->belongsTo(WalletGroup::class);
-    }
 
     public function transactions()
     {

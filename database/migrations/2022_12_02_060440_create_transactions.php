@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('transaction_category_id');
             $table->foreignId('wallet_id');
-            $table->smallInteger('code');
+            $table->bigInteger('code');
             $table->string('name');
             $table->smallInteger('mutation');
             $table->decimal('decimal');

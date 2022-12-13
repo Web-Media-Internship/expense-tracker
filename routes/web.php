@@ -7,6 +7,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WalletGroupController;
+use App\Http\Controllers\TransactionCategoryController;
 
 
 /*
@@ -29,7 +30,9 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 //transaction route
-Route::get('/', [TransactionController::class, 'index'])->middleware('auth');
+Route::resource('/', TransactionController::class)->middleware('auth');
+
+Route::resource('/category', TransactionCategoryController::class)->middleware('auth');
 
 //wallet reoute
 Route::resource('/walletgroup', WalletGroupController::class)->middleware('auth');
