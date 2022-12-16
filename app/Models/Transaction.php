@@ -10,13 +10,13 @@ class Transaction extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function wallet()
     {
         return $this->belongsTo(Wallet::class);
-    }
-    public function category()
-    {
-        return $this->belongsTo(TransactionCategory::class);
     }
 }

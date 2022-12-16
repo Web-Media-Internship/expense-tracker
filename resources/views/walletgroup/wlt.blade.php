@@ -16,17 +16,17 @@
                 @endif
             </div>
             
-            <a href="#" class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" 
+            <a href="" class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" 
             data-target="#detailwg">
                 <span class="icon text-white-50"><i class="bi bi-eye"></i></span>
                 <span class="text">Detail</span>
             </a>
-            <a href="#editwg" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" 
-            data-target="#">
+            <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" 
+            data-target="#editwg">
                 <span class="icon text-white-50"><i class="bi bi-pencil"></i></span>
                 <span class="text">Edit</span>
             </a>
-            <a href="#" class="btn btn-danger btn-icon-split btn-sm" data-toggle="modal" 
+            <a href="" class="btn btn-danger btn-icon-split btn-sm" data-toggle="modal" 
             data-target="#delModal">
                 <span class="icon text-white-50"><i class="bi bi-trash3"></i></span>
                 <span class="text">delete</span>
@@ -61,7 +61,7 @@
                 <div class="table-responsive">
                 <ul class="list-group">
                     @foreach($wl as $post)
-                    <li class="list-group-item">
+                    <li class="list-group-item col-xl-8 col-lg-4">
                         {{ $post->name }}
                         <a href="/wallet/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-1">
                             <span class="text dark">Detail</span>
@@ -103,8 +103,8 @@
                     </div>
                     <br>
                     <div>
-                        <input name="description" type="text" class="form-control form-control-user @error('description') is-invalid @enderror"
-                            id="description" placeholder="description">
+                        <textarea name="description" type="text" class="form-control form-control-user @error('description') is-invalid @enderror"
+                            id="description" placeholder="description"></textarea>
                         @error('description')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -213,7 +213,7 @@
         function actv()
         {
             let onof = document.getElementById('onof');
-            let act = document.getElementById('nf');
+            let nf = document.getElementById('nf');
 
             if (onof.checked){
                 act.value = '1';

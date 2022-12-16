@@ -16,7 +16,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('/walletgroup');
     }
 
     /**
@@ -26,7 +26,7 @@ class WalletController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/walletgroup');
     }
 
     /**
@@ -49,7 +49,7 @@ class WalletController extends Controller
 
         if(session(key: 'wg'))
         {
-            return redirect(session(key: 'wg'))->with('success', 'New Wallet Has been added!');
+            return redirect(session(key: 'wg'));
         }
 
         return redirect('/walletgroup')->with('success', 'New Wallet Has been added!');
@@ -79,7 +79,11 @@ class WalletController extends Controller
      */
     public function edit(Wallet $wallet)
     {
-        //
+        if(session(key: 'wl'))
+        {
+            return redirect(session(key: 'wl'));
+        }
+        return redirect('/walletgroup');
     }
 
     /**

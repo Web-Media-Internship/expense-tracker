@@ -3,16 +3,16 @@
 @section('container')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-dark"> {{ $wlt->name }} </h5>
+            <h5 class="m-0 font-weight-bold text-dark"> {{ $ctgs->name }} </h5>
             <div class="text-dark-50 small">
-                @if($wlt->is_active == 1 )
+                @if($ctgs->is_active == 1 )
                     active
                 @else
                     non active
                 @endif
             </div>
             
-            <a href="/walletgroup/{{ $wlt->wallet_group_id }}" class="btn btn-primary btn-icon-split btn-sm">
+            <a href="/category" class="btn btn-primary btn-icon-split btn-sm">
                 <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
                 <span class="text">Back</span>
             </a>
@@ -50,14 +50,14 @@
 
                 
                 <div class="text-secondary">description:</div>
-                    <div class="text-warning">{{ $wlt->description }}</div>
+                    <div class="text-warning">{{ $ctgs->description }}</div>
                     <div>
                         <div class="text-secondary">create at:</div>
-                        <div class="text-warning">{{ $wlt->created_at }}</div>
+                        <div class="text-warning">{{ $ctgs->created_at }}</div>
                     </div>
                     <div>
                         <div class="text-secondary">update at:</div>
-                        <div class="text-warning">{{ $wlt->updated_at }}</div>
+                        <div class="text-warning">{{ $ctgs->updated_at }}</div>
                     </div>
 
                 
@@ -82,12 +82,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form method="POST" action="/wallet/{{ $wlt->id }}">
+                <form method="POST" action="/category/{{ $ctgs->id }}">
                     @method('put')
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name', $wlt->name) }}">
+                            id="name" placeholder="name" value="{{ old('name', $ctgs->name) }}">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -97,7 +97,7 @@
                     <br>
                     <div>
                         <textarea name="description" type="text" class="form-control form-control-user @error('description') is-invalid @enderror"
-                            id="description" placeholder="description">{{ old('description', $wlt->description) }}</textarea>
+                            id="description" placeholder="description">{{ old('description', $ctgs->description) }}</textarea>
                         @error('description')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -109,12 +109,12 @@
                         <div>
                             <label class="lonf">
                                 <input class="onof" type="checkbox" id="onof" onchange="actv()" 
-                                @if(old('is_active', $wlt->is_active) == 1) checked @else @endif>
+                                @if(old('is_active', $ctgs->is_active) == 1) checked @else @endif>
                                 <span class="obg"></span>
                                 <a class="act"></a>
                             </label>
                         </div>
-                        <input type="hidden" name="is_active" id="act" value="{{$wlt->is_active}}">
+                        <input type="hidden" name="is_active" id="act" value="{{$ctgs->is_active}}">
                         @error('is_active')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -161,7 +161,7 @@
                 <div class="modal-body">Select "delete" to delete data!</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="/wallet/{{ $wlt->id }}" method="POST"> 
+                    <form action="/category/{{ $ctgs->id }}" method="POST"> 
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">delete</button>

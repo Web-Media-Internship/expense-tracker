@@ -2,12 +2,13 @@
 
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WalletGroupController;
-use App\Http\Controllers\TransactionCategoryController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -30,11 +31,12 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 //transaction route
-Route::resource('/', TransactionController::class)->middleware('auth');
+Route::get('/', [IndexController::class, 'index'])->middleware('auth');
+Route::resource('/transaction', TransactionController::class)->middleware('auth');
 
-Route::resource('/category', TransactionCategoryController::class)->middleware('auth');
+Route::resource('/category', CategoryController::class)->middleware('auth');
 
 //wallet reoute
 Route::resource('/walletgroup', WalletGroupController::class)->middleware('auth');
 
-Route::resource('/wallet', WalletController::class)->except('index')->middleware('auth');
+Route::resource('/wallet', WalletController::class)->middleware('auth');

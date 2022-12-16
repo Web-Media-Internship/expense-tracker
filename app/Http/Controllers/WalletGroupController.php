@@ -29,7 +29,7 @@ class WalletGroupController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/walletgroup');
     }
 
     /**
@@ -77,7 +77,7 @@ class WalletGroupController extends Controller
      */
     public function edit(WalletGroup $walletGroup)
     {
-        //
+        return redirect('/walletgroup');
     }
 
     /**
@@ -116,7 +116,6 @@ class WalletGroupController extends Controller
      */
     public function destroy(walletgroup $walletgroup)
     {
-        
         walletgroup::destroy($walletgroup->id);
         Wallet::where('wallet_group_id', $walletgroup->id)->delete();
 

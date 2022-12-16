@@ -46,8 +46,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+            <li class="nav-item {{ Request::is('transaction') ? 'active' : '' }}">
+                <a class="nav-link" href="/transaction">
                     <i class="bi bi-grid-1x2"></i>
                     <span>Transaction</span></a>
             </li>

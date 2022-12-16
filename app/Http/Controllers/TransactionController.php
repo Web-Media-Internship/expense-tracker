@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Category;
+use App\Models\Wallet;
+use App\Models\WalletGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class TransactionController extends Controller
@@ -17,7 +21,7 @@ class TransactionController extends Controller
     {
         return view('transaction.trsn', [
             "title" => "Transaction",
-            "trn" => Transaction::where('user_id', auth()->user()->id)->get()
+            "trn" => Transaction::where('user_id', auth()->user()->id)->get(),
         ]);
     }
 
@@ -30,7 +34,12 @@ class TransactionController extends Controller
     {
         return view('transaction.create', [
             "title" => "Transaction",
-            "trn" => Transaction::where('user_id', auth()->user()->id)->get()
+            "ctg" => Category::where('user_id', auth()->user()->id)->get(),
+            "wlt" => WalletGroup::where('user_id', auth()->user()->id)
+                ->join('wallets', 'wallet_groups.id', '=', 'wallets.wallet_group_id')
+                ->select('wallets.name', 'wallets.id', 'wallets.is_active')
+                ->where('wallet_groups.is_active', '1')
+                ->get()
         ]);
     }
 
@@ -44,12 +53,12 @@ class TransactionController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:15',
-            'transaction_category_id' => 'required',
+            'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
             'decimal' => 'required',
             'date' => 'required',
-            'description' => 'required'
+            'description' => 'max:100'
         ]);
 
         $mi = DB::table('transactions')->select(DB::raw('MAX(RIGHT(id,3)) as kode'));
@@ -81,7 +90,12 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        Session::put('td', request()->fullUrl());
+        
+        return view('transaction.detail', [
+            'trd' => $transaction,
+            'title' => "Category detail"
+        ]);
     }
 
     /**
@@ -115,6 +129,8 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        Transaction::destroy($transaction->id);
+
+        return redirect('/')->with('success', 'Transaction Has been deleted!');
     }
 }
