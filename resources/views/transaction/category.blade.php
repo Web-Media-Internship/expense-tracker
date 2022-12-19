@@ -34,10 +34,19 @@
             @foreach($ctg as $post)
             <li class="list-group-item col-xl-8 col-lg-4">
                 {{ $post->name }}
-                <a href="/category/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-1">
+                <a href="/category/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-3">
                     <span class="text dark">Detail</span>
                     <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
                 </a>
+                @if($post->is_active == 1 )
+                <a class="btn-warning btn-icon-split btn-sm float-right ml-1">
+                    <span class="text dark">active</span>
+                </a>
+                @else
+                <a class="btn-danger btn-icon-split btn-sm float-right ml-1">
+                    <span class="text dark">non active</span>
+                </a>
+                @endif
             </li>
             @endforeach
         </div>
