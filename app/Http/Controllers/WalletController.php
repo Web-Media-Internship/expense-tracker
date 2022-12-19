@@ -79,10 +79,6 @@ class WalletController extends Controller
      */
     public function edit(Wallet $wallet)
     {
-        if(session(key: 'wl'))
-        {
-            return redirect(session(key: 'wl'));
-        }
         return redirect('/walletgroup');
     }
 

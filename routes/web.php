@@ -30,8 +30,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-//transaction route
 Route::get('/', [IndexController::class, 'index'])->middleware('auth');
+
+//transaction route
 Route::resource('/transaction', TransactionController::class)->middleware('auth');
 
 Route::resource('/category', CategoryController::class)->middleware('auth');

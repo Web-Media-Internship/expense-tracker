@@ -16,8 +16,7 @@
                 <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
                 <span class="text">Back</span>
             </a>
-            <a href="" class="btn btn-warning btn-icon-split btn-sm ml-1" data-toggle="modal" 
-            data-target="#editwg">
+            <a href="/transaction/{{ $trd->id }}/edit" class="btn btn-warning btn-icon-split btn-sm ml-1">
                 <span class="icon text-white-50"><i class="bi bi-pencil"></i></span>
                 <span class="text">Edit</span>
             </a>
@@ -74,83 +73,6 @@
     </div>
 
 
-
-
-    <!-- edit modal -->
-    <div class="modal fade" id="editwg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Wallet Group</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <form method="POST" action="/transaction/{{ $trd->id }}">
-                    @method('put')
-                    @csrf
-                    <div>
-                        <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name', $trd->name) }}">
-                        @error('name')
-                        <div class="text-danger ml-2">
-                            <small>{{ $message }}</small>
-                        </div>
-                        @enderror
-                    </div>
-                    <br>
-                    <div>
-                        <textarea name="description" type="text" class="form-control form-control-user @error('description') is-invalid @enderror"
-                            id="description" placeholder="description">{{ old('description', $trd->description) }}</textarea>
-                        @error('description')
-                        <div class="text-danger ml-2">
-                            <small>{{ $message }}</small>
-                        </div>
-                        @enderror
-                    </div>
-                    <div>
-                        <div id="nf">Active</div>
-                        <div>
-                            <label class="lonf">
-                                <input class="onof" type="checkbox" id="onof" onchange="actv()" 
-                                @if(old('is_active', $trd->is_active) == 1) checked @else @endif>
-                                <span class="obg"></span>
-                                <a class="act"></a>
-                            </label>
-                        </div>
-                        <input type="hidden" name="is_active" id="act" value="{{$trd->is_active}}">
-                        @error('is_active')
-                        <div class="text-danger ml-2">
-                            <small>{{ $message }}</small>
-                        </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Update</button>
-                </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function actv()
-        {
-            let onof = document.getElementById('onof');
-            let nf = document.getElementById('nf');
-
-            if (onof.checked){
-                act.value = '1';
-                nf.innerHTML = 'Active';
-            }else{
-                act.value = '0';
-                nf.innerHTML = 'Not Active';
-            }
-        }
-    </script>
 
 
     <!-- delete Modal-->

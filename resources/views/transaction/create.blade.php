@@ -14,14 +14,19 @@
         @csrf
         <div class="inputfield">
             <label>Transaction Name</label>
-            <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror">
+            <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
+            value="{{ old('name') }}">
         </div>
         <div class="inputfield">
             <label>Category</label>
             <div class="custom_select">
-                <select class="form-control form-control-user" name="category_id">
+                <select class="form-control form-control-user @error('category_id') is-invalid @enderror" name="category_id">
                     @foreach ($ctg as $wl)
-                    @if($wl->is_active == 1 ) <option value="{{ $wl->id }}">{{ $wl->name }}</option> @else @endif
+                    @if(old('category_id') == $wl->id)
+                        <option value="{{ $wl->id }}" selected>{{ $wl->name }}</option>
+                    @else
+                        <option value="{{ $wl->id }}">{{ $wl->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -29,9 +34,13 @@
         <div class="inputfield">
             <label>Wallet</label>
             <div class="custom_select">
-                <select class="form-control form-control-user" name="wallet_id">
+                <select class="form-control form-control-user @error('wallet_id') is-invalid @enderror" name="wallet_id">
                     @foreach ($wlt as $wl)
-                    @if($wl->is_active == 1 ) <option value="{{ $wl->id }}">{{ $wl->name }}</option> @else @endif
+                    @if(old('wallet_id') == $wl->id)
+                        <option value="{{ $wl->id }}" selected>{{ $wl->name }}</option>
+                    @else
+                        <option value="{{ $wl->id }}">{{ $wl->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -39,23 +48,28 @@
         <div class="inputfield">
             <label>Mutation</label>
             <div class="custom_select">
-                <select class="form-control form-control-user" name="mutation">
-                    <option value="1">Income</option>
-                    <option value="0">Expense</option>
+                <select class="form-control form-control-user @error('mutation') is-invalid @enderror" name="mutation">
+                    <option value="1" @if(old('mutation') == 1) selected
+                    @else @endif>Income</option>
+                    <option value="0"  @if(old('mutation') == 0) selected
+                    @else @endif>Expense</option>
                 </select>
             </div>
         </div>
         <div class="inputfield">
             <label>amount</label>
-            <input name="decimal" type="number" class="form-control form-control-user">
+            <input name="decimal" type="number" class="form-control form-control-user @error('decimal') is-invalid @enderror"
+            value="{{ old('decimal') }}">
         </div>
         <div class="inputfield">
             <label>Description</label>
-            <textarea name="description" class="form-control form-control-user"></textarea>
+            <textarea name="description" class="form-control form-control-user @error('descriprion') is-invalid @enderror"
+            >{{ old('description') }}</textarea>
         </div>
         <div class="inputfield">
             <label>Date</label>
-            <input name="date" type="datetime-local" class="form-control form-control-user">
+            <input name="date" type="datetime-local" class="form-control form-control-user @error('date') is-invalid @enderror"
+            value="{{ old('date') }}">
         </div>
         <div class="inputfield">
             <button type="submit" value="Register" class="btn">create</button>

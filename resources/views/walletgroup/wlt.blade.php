@@ -94,7 +94,7 @@
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name">
+                            id="name" placeholder="name" value="{{ old('name') }}">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -104,7 +104,7 @@
                     <br>
                     <div>
                         <textarea name="description" type="text" class="form-control form-control-user @error('description') is-invalid @enderror"
-                            id="description" placeholder="description"></textarea>
+                            id="description" placeholder="description">{{ old('description') }}</textarea>
                         @error('description')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>

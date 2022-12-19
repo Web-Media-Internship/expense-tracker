@@ -34,11 +34,13 @@ class TransactionController extends Controller
     {
         return view('transaction.create', [
             "title" => "Transaction",
-            "ctg" => Category::where('user_id', auth()->user()->id)->get(),
+            "ctg" => Category::where('user_id', auth()->user()->id)->get()
+                ->where('is_active', '1'),
             "wlt" => WalletGroup::where('user_id', auth()->user()->id)
                 ->join('wallets', 'wallet_groups.id', '=', 'wallets.wallet_group_id')
                 ->select('wallets.name', 'wallets.id', 'wallets.is_active')
                 ->where('wallet_groups.is_active', '1')
+                ->where('wallets.is_active', '1')
                 ->get()
         ]);
     }
@@ -79,7 +81,7 @@ class TransactionController extends Controller
 
         Transaction::create($validatedData);
 
-        return redirect('/');
+        return redirect('/transaction')->with('success', 'New Transaction Has been added!');
     }
 
     /**
@@ -94,7 +96,7 @@ class TransactionController extends Controller
         
         return view('transaction.detail', [
             'trd' => $transaction,
-            'title' => "Category detail"
+            'title' => "Transaction detail"
         ]);
     }
 
@@ -106,7 +108,19 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return view('transaction.edit', [
+            'trd' => $transaction,
+            
+            "ctg" => Category::where('user_id', auth()->user()->id)->get()
+                ->where('is_active', '1'),
+            "wlt" => WalletGroup::where('user_id', auth()->user()->id)
+                ->join('wallets', 'wallet_groups.id', '=', 'wallets.wallet_group_id')
+                ->select('wallets.name', 'wallets.id', 'wallets.is_active')
+                ->where('wallet_groups.is_active', '1')
+                ->where('wallets.is_active', '1')
+                ->get(),
+            'title' => "Edit Transaction"
+        ]);
     }
 
     /**
@@ -118,7 +132,24 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:15',
+            'category_id' => 'required',
+            'wallet_id' => 'required',
+            'mutation' => 'required',
+            'decimal' => 'required',
+            'date' => 'required',
+            'description' => 'max:100'
+        ]);
+        $ti = [$transaction->id];
+        Transaction::where('id', $ti)->update($validatedData);
+        
+        if(session(key: 'td'))
+        {
+            return redirect(session(key: 'td'))->with('success', 'Transaction Has been updated!');
+        }
+
+        return redirect('/walletgroup')->with('success', 'Transaction Has been updated!');
     }
 
     /**
@@ -131,6 +162,6 @@ class TransactionController extends Controller
     {
         Transaction::destroy($transaction->id);
 
-        return redirect('/')->with('success', 'Transaction Has been deleted!');
+        return redirect('/transaction')->with('success', 'Transaction Has been deleted!');
     }
 }

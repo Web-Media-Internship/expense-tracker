@@ -46,12 +46,12 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Request::is('transaction') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('transaction*', 'category*') ? 'active' : '' }}">
                 <a class="nav-link" href="/transaction">
                     <i class="bi bi-grid-1x2"></i>
                     <span>Transaction</span></a>
             </li>
-            <li class="nav-item {{ Request::is('walletgroup') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('walletgroup*', 'wallet*') ? 'active' : '' }}">
                 <a class="nav-link" href="/walletgroup">
                     <i class="bi bi-wallet2"></i>
                     <span>Wallet</span></a>
@@ -73,7 +73,6 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">Profil Setting</a>
                         <a class="collapse-item" href="">Change Password</a>
                     </div>
                 </div>
@@ -103,19 +102,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -159,14 +145,9 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 </a>
                             </div>
                         </li>
