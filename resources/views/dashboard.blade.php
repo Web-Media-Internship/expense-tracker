@@ -55,7 +55,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: {!! json_encode($month) !!},
     datasets: [{
-      label: "Earnings",
+      label: "expenditure",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
