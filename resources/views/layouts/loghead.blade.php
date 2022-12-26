@@ -40,7 +40,7 @@
                             <div class="col mx-auto">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome User !</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{ $nm }}</h1>
                                     </div>
 
                                     @yield('container')

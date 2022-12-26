@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('fpas', function (Blueprint $table) {
+            $table->smallInteger('id');
             $table->foreignId('user_id');
-            $table->foreignId('category_id');
-            $table->foreignId('wallet_id');
             $table->bigInteger('code');
-            $table->string('name');
-            $table->smallInteger('mutation');
-            $table->decimal('amount');
-            $table->timestamp('date')->nullable();
-            $table->text('description');
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('fpas');
     }
 };

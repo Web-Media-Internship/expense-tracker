@@ -58,8 +58,8 @@
         </div>
         <div class="inputfield">
             <label>amount</label>
-            <input name="decimal" type="number" class="form-control form-control-user @error('decimal') is-invalid @enderror"
-            value="{{ old('decimal') }}">
+            <input name="amount" type="number" class="form-control form-control-user @error('amount') is-invalid @enderror"
+            value="{{ old('amount') }}">
         </div>
         <div class="inputfield">
             <label>Description</label>

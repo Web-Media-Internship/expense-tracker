@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
@@ -9,7 +8,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WalletGroupController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\forgotPasswordController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +23,20 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// login & register route
+// login, forgot password, & register route
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+Route::get('/forgot-password', [forgotPasswordController::class, 'index'])->middleware('guest');
+Route::post('/forgot-password', [forgotPasswordController::class, 'email']);
+Route::get('/reset-password/{fpas:code}', [forgotPasswordController::class, 'edit'])->middleware('guest');
+Route::post('/reset-password/{fpas}', [forgotPasswordController::class, 'update']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/', [IndexController::class, 'index'])->middleware('auth');
-
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 //transaction route
 Route::resource('/transaction', TransactionController::class)->middleware('auth');
 

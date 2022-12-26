@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Category;
-use App\Models\Wallet;
+use App\Models\Fpas;
 use App\Models\WalletGroup;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use DB;
 
@@ -19,9 +20,18 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $fpas = Fpas::where('user_id', auth()->user()->id);
+        if ($fpas->count() > 0) {
+            foreach ($fpas->get() as $fp) {
+                if (Carbon::now() > $fp->expired_at) {
+                    Fpas::destroy($fp->id);
+                }
+            }
+        }
+
         return view('transaction.trsn', [
             "title" => "Transaction",
-            "trn" => Transaction::where('user_id', auth()->user()->id)->get(),
+            "trn" => Transaction::where('user_id', auth()->user()->id)->paginate(10),
         ]);
     }
 
@@ -34,8 +44,8 @@ class TransactionController extends Controller
     {
         return view('transaction.create', [
             "title" => "Transaction",
-            "ctg" => Category::where('user_id', auth()->user()->id)->get()
-                ->where('is_active', '1'),
+            "ctg" => Category::where('user_id', auth()->user()->id)
+                ->where('is_active', '1')->get(),
             "wlt" => WalletGroup::where('user_id', auth()->user()->id)
                 ->join('wallets', 'wallet_groups.id', '=', 'wallets.wallet_group_id')
                 ->select('wallets.name', 'wallets.id', 'wallets.is_active')
@@ -58,9 +68,9 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'decimal' => 'required',
+            'amount' => 'required',
             'date' => 'required',
-            'description' => 'max:100'
+            'description' => 'required|max:100'
         ]);
 
         $mi = DB::table('transactions')->select(DB::raw('MAX(RIGHT(id,3)) as kode'));
@@ -137,9 +147,9 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'decimal' => 'required',
+            'amount' => 'required',
             'date' => 'required',
-            'description' => 'max:100'
+            'description' => 'required|max:100'
         ]);
         $ti = [$transaction->id];
         Transaction::where('id', $ti)->update($validatedData);
@@ -149,7 +159,7 @@ class TransactionController extends Controller
             return redirect(session(key: 'td'))->with('success', 'Transaction Has been updated!');
         }
 
-        return redirect('/walletgroup')->with('success', 'Transaction Has been updated!');
+        return redirect('/transaction')->with('success', 'Transaction Has been updated!');
     }
 
     /**

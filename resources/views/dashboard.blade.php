@@ -1,4 +1,25 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
+@extends('layouts.head')
+
+@section('container')
+
+<!-- Area Chart -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">monthly expenditure data</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-area">
+            <canvas id="myAreaChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('template/vendor/chart.js/Chart.min.js') }}"></script>
+
+
+<!-- dashboard js -->
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -32,7 +53,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: {!! json_encode($month) !!},
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -46,7 +67,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 100000, 200000, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1600000, 1800000, 2000000],
+      data: {!! json_encode($total) !!},
     }],
   },
   options: {
@@ -116,3 +137,8 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+
+</script>
+
+
+@endsection
