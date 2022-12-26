@@ -26,7 +26,7 @@
             </div>
             <div class="col-sm-6">
                 <input type="password" class="form-control form-control-user @error('password_confirmation') is-invalid @enderror"
-                    name="password_confirmation" id="exampleRepeatPassword" placeholder="Password Conformation">
+                    name="password_confirmation" id="exampleRepeatPassword" placeholder="Password Confirmation">
                     @error('password_confirmation')
                     <div class="text-danger ml-2">
                         <small>{{ $message }}</small>

@@ -30,8 +30,11 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/forgot-password', [forgotPasswordController::class, 'index'])->middleware('guest');
 Route::post('/forgot-password', [forgotPasswordController::class, 'email']);
-Route::get('/reset-password/{fpas:code}', [forgotPasswordController::class, 'edit'])->middleware('guest');
+Route::get('/reset-password/{fpas:code}', [forgotPasswordController::class, 'edit']);
 Route::post('/reset-password/{fpas}', [forgotPasswordController::class, 'update']);
+
+Route::get('/update-password', [forgotPasswordController::class, 'check'])->middleware('auth');
+Route::post('/update-password', [forgotPasswordController::class, 'change']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);

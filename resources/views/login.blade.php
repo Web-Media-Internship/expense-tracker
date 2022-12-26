@@ -4,6 +4,9 @@
     @if(session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert" aria-hidden="true">
             {{ session('success') }}
+            <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
     @endif
     <form method="POST" action="/login" class="user">

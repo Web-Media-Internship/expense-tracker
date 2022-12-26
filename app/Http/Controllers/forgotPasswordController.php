@@ -28,7 +28,7 @@ class forgotPasswordController extends Controller
         ]);
 
         if(!User::where('email', $email)->exists()) {
-            return back()->with('logerror', 'email not found');
+            return back()->with('logerror', 'e-mail not registered');
         }
 
         $mi = DB::table('fpas')->select(DB::raw('MAX(RIGHT(id,1)) as kode'));
@@ -61,7 +61,7 @@ class forgotPasswordController extends Controller
         ];
         Mail::to("$request->email")->send(new forgotPassword($data));
         
-        return redirect('/login')->with('success', 'Password reset link has been sent to your email!');
+        return back()->with('success', 'Password reset link has been sent to your email!');
     }
     
     public function edit(fpas $fpas)
@@ -85,12 +85,38 @@ class forgotPasswordController extends Controller
             'password_confirmation' => 'required|same:password'
         ]);
 
-    $validatedData['password'] = Hash::make($ceckpassword['password']);
-    
-    User::where('id', $fpas->user_id)->update($validatedData);
-    Fpas::destroy($fpas->id);
-    
-    return redirect('/login')->with('success', 'New Password Has been updated!');
+        $validatedData['password'] = Hash::make($ceckpassword['password']);
+        
+        User::where('id', $fpas->user_id)->update($validatedData);
+        Fpas::destroy($fpas->id);
+        
+        return redirect('/login')->with('success', 'New Password Has been updated!');
+
+    }
+
+    public function check(Request $request)
+    {
+        return view('fpass.uppas', [
+            "title" => "Update Password",
+        ]);
+    }
+
+    public function change(Request $request)
+    {
+        $ceckpassword = $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:5|max:50',
+            'password_confirmation' => 'required|same:password'
+        ]);
+
+        if(!Hash::check($request->current_password, auth()->user()->password)){
+            return back()->with('curerror', 'your currnet password does not match with our record');
+        }
+        $validatedData['password'] = Hash::make($ceckpassword['password']);
+        
+        User::where('id', auth()->user()->id)->update($validatedData);
+        
+        return back()->with('success', 'New Password Has been updated!');
 
     }
 }

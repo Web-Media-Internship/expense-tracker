@@ -105,7 +105,7 @@
                         @enderror
                     </div>
                     <div>
-                        <div id="nf">Active</div>
+                        <div id="nf">@if(old('is_active', $wlt->is_active) == 1) Active @else Not Active @endif</div>
                         <div>
                             <label class="lonf">
                                 <input class="onof" type="checkbox" id="onof" onchange="actv()" 
