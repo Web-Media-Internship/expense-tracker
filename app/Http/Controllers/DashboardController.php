@@ -26,20 +26,58 @@ class DashboardController extends Controller
             ->GroupBy(DB::raw("Month(date)"))
             ->OrderBy(DB::raw("Month(date)"))
             ->where('user_id', auth()->user()->id)
-            ->where('mutation', 0)
-            ->pluck('total');
+            ->where('mutation', 0);
 
         $m = Transaction::select(DB::raw("MONTHNAME(date) as bln"))
             ->GroupBy(DB::raw("MONTHNAME(date)"))
             ->OrderBy(DB::raw("MONTH(date)"))
             ->where('user_id', auth()->user()->id)
-            ->where('mutation', 0)
-            ->pluck('bln');
+            ->where('mutation', 0);
+            
 
         return view('dashboard', [
             "title" => "dashboard",
-            "total" => $t,
-            "month" => $m
+            "total" => $t->pluck('total'),
+            "month" => $m->pluck('bln'),
+            "mlink" => $m->get('bln')
+        ]);
+    }
+
+    public function month()
+    {
+        
+        $mn = Transaction::select(DB::raw("MONTHNAME(date) as bln"))
+            ->GroupBy(DB::raw("MONTHNAME(date)"))
+            ->OrderBy(DB::raw("MONTH(date)"))
+            ->where('user_id', auth()->user()->id)
+            ->where('mutation', 0)
+            ->get('bln');
+            
+        $tr = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+            ->get();
+
+        $m = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+            ->select(DB::raw("SUM(mutation) as mt"))
+            ->where('user_id', auth()->user()->id)
+            ->GroupBy("mutation")
+            ->OrderBy("mutation")
+            ->get('mt');
+            
+        $t = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+            ->select(DB::raw("SUM(amount) as total"))
+            ->where('user_id', auth()->user()->id)
+            ->GroupBy("mutation")
+            ->OrderBy("mutation")
+            ->pluck('total');
+
+
+        return view('month', [
+            "title" => "Monthly Data",
+            "mlink" => $mn,
+            "mt" => $m,
+            "tl" => $t,
+            "trn" => $tr,
+            "m" => request('bulan')
         ]);
     }
 }

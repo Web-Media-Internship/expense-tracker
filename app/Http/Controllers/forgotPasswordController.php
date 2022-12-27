@@ -48,11 +48,12 @@ class forgotPasswordController extends Controller
             $ui = ((int) $k->id);
         }
         $cd = date('ymdhis') + 146338246512;
+        $date = Carbon::now()->addMinutes(5);
 
         $validatedData['id'] = $id;
         $validatedData['user_id'] = $ui;
         $validatedData['code'] = $cd;
-        $validatedData['expired_at'] = Carbon::now()->addMinutes(5);
+        $validatedData['expired_at'] = $date;
 
         Fpas::Create($validatedData);
 

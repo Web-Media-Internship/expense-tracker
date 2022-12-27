@@ -72,7 +72,7 @@
             value="{{ old('date') }}">
         </div>
         <div class="inputfield">
-            <button type="submit" value="Register" class="btn">create</button>
+            <button type="submit" class="btn">create</button>
         </div>
         </form>
     </div>

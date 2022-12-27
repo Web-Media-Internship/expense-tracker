@@ -8,9 +8,34 @@
         <h6 class="m-0 font-weight-bold text-primary">monthly expenditure data</h6>
     </div>
     <div class="card-body">
-        <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
-        </div>
+      <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+        <a class="navbar-brand" href="#">Monthly Data</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--grow-in"
+                    aria-labelledby="navbarDropdown">
+                      @foreach($mlink as $mn)
+                      <div>
+                        <form method="POST" action="/">
+                          @csrf
+                          <input type="hidden" value="{{ $mn->bln }}" name="bulan">
+                          <button type="submit" class="btn">{{ $mn->bln }}</button>
+                        </form>
+                      </div>
+                      @endforeach
+                </div>
+            </li>
+        </ul>
+      </nav>
+      <hr>
+      <div class="chart-area">
+          <canvas id="myAreaChart"></canvas>
+      </div>
     </div>
 </div>
 
