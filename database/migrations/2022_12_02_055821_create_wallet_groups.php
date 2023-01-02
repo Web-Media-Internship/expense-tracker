@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('wallet_groups', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->foreignId('user_id');
             $table->string('name');
             $table->smallInteger('is_active');

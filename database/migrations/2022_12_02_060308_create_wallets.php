@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->foreignId('wallet_group_id');
             $table->string('name');
             $table->text('description');
