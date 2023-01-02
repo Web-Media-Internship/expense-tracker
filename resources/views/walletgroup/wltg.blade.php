@@ -34,7 +34,7 @@
             @foreach($wltg as $post)
             <div class="col-xl-6 col-lg-4">
                 <div class="table-responsive mt-2">
-                    <a class="alert dropdown-item d-flex align-items-center bg-warning border-left-info" href="/walletgroup/{{ $post->id }}">
+                    <a class="alert dropdown-item d-flex align-items-center bg-warning border-left-info" href="/walletgroup/{{ $post->slug }}">
                         <div class="text-white">{{ $post->name }}
                             <div class="text-white-50 small">
                                 @if($post->is_active == 1 )
@@ -68,7 +68,7 @@
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name">
+                            id="name" placeholder="name" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('code');
             $table->string('name');
             $table->smallInteger('mutation');
-            $table->decimal('amount');
+            $table->integer('amount');
             $table->timestamp('date')->nullable();
             $table->text('description');
             $table->timestamps();

@@ -11,10 +11,18 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show col-xl-6 col-lg-4" data-toggle="alert">
+                    {{ session('success') }}
+                    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                @endif
                 <a href="/transaction/create">
                     <div class=""><i class="bi bi-plus-circle"></i> create new Transaction</div>
                 </a>
-                <table class="mb-3" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered mb-3" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -36,7 +44,7 @@
                                 @endif
                             </td>
                             <td>
-                            <a href="/transaction/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm mb-1">
+                            <a href="/transaction/{{ $post->slug }}" class="btn btn-secondary btn-icon-split btn-sm mb-1">
                                 <span class="text dark">Detail</span>
                                 <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
                             </a>

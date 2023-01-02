@@ -82,12 +82,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form method="POST" action="/wallet/{{ $wlt->id }}">
+                <form method="POST" action="/wallet/{{ $wlt->slug }}">
                     @method('put')
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name', $wlt->name) }}">
+                            id="name" placeholder="name" value="{{ old('name', $wlt->name) }}" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -161,7 +161,7 @@
                 <div class="modal-body">Select "delete" to delete data!</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="/wallet/{{ $wlt->id }}" method="POST"> 
+                    <form action="/wallet/{{ $wlt->slug }}" method="POST"> 
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">delete</button>

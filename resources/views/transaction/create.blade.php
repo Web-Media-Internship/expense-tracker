@@ -9,13 +9,23 @@
     <div class="title">
         Create new Transaction
     </div>
+    @if($errors->any())
+    <small><a href="#" class="btn btn-danger btn-icon-split" data-toggle="modal" 
+            data-target="#warModal">
+        <span class="icon text-white-50">
+            <i class="fas fa-exclamation-triangle"></i>
+        </span>
+        <span class="text">Click this button for all Errors</span>
+    </a></small>
+    <hr>
+    @endif
     <div class="form">
         <form method="post" action="/transaction">
         @csrf
         <div class="inputfield">
             <label>Transaction Name</label>
             <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-            value="{{ old('name') }}">
+            value="{{ old('name') }}" autocomplete="off">
         </div>
         <div class="inputfield">
             <label>Category</label>
@@ -58,8 +68,9 @@
         </div>
         <div class="inputfield">
             <label>amount</label>
-            <input name="amount" type="number" class="form-control form-control-user @error('amount') is-invalid @enderror"
-            value="{{ old('amount') }}">
+            <input name="amount" type="text" class="form-control form-control-user @error('amount') is-invalid @enderror"
+            value="{{ old('amount') }}" id="inputku" onkeydown="return numbersonly(this, event);"
+            onkeyup="javascript:tandaPemisahTitik(this);" autocomplete="off">
         </div>
         <div class="inputfield">
             <label>Description</label>
@@ -77,4 +88,31 @@
         </form>
     </div>
 </div>
+
+<!-- Warning Modal-->
+<div class="modal fade" id="warModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Make sure to enter the word correctly!!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body ml-2">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ asset('template/js/point.js') }}"></script>
 @endsection

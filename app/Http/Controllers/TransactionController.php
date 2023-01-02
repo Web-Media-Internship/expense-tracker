@@ -9,6 +9,7 @@ use App\Models\WalletGroup;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use DB;
 
 class TransactionController extends Controller
@@ -68,26 +69,31 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|max:9',
             'date' => 'required',
             'description' => 'required|max:100'
         ]);
 
-        $mi = DB::table('transactions')->select(DB::raw('MAX(RIGHT(id,3)) as kode'));
+        $slug = md5($request->name);
+
+        $mi = DB::table('transactions')->select(DB::raw('MAX(id) as kode'));
         $kd = "";
         if($mi->count()>0)
         {
             foreach($mi->get() as $k)
             {
-                $tmp = ((int) $k->kode) + 1;
-                $kd = date('ymd').sprintf("%03s", $tmp);
+                $dk = ((int) $k->kode) + 1;
             }
         }else{
-            $kd = date('ymd')."001";
+            $dk = "1";
         }
+        $kd = date('ymd').sprintf("%03s", $dk);
+
         
         $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['amount'] = preg_replace("/[^0-9]/", "", $validatedData['amount']);
         $validatedData['code'] = $kd;
+        $validatedData['slug'] = date('s').$dk.$slug.date('hi');
 
         Transaction::create($validatedData);
 
@@ -147,7 +153,7 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|max:9',
             'date' => 'required',
             'description' => 'required|max:100'
         ]);

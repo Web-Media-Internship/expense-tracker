@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -44,7 +45,21 @@ class CategoryController extends Controller
             'description' => 'required|max:100',
             'is_active' => 'required'
         ]);
+        
+        $slug = md5($request->name);
 
+        $mi = DB::table('categories')->select(DB::raw('MAX(id) as kode'));
+        if($mi->count()>0)
+        {
+            foreach($mi->get() as $k)
+            {
+                $id = ((int) $k->kode) + 1;
+            }
+        }else{
+            $id = "1";
+        }
+
+        $validatedData['slug'] = date('s').$id.$slug.date('hi');
         $validatedData['user_id'] = auth()->user()->id;
         Category::create($validatedData);
 

@@ -16,7 +16,7 @@
                 <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
                 <span class="text">Back</span>
             </a>
-            <a href="/transaction/{{ $trd->id }}/edit" class="btn btn-warning btn-icon-split btn-sm ml-1">
+            <a href="/transaction/{{ $trd->slug }}/edit" class="btn btn-warning btn-icon-split btn-sm ml-1">
                 <span class="icon text-white-50"><i class="bi bi-pencil"></i></span>
                 <span class="text">Edit</span>
             </a>
@@ -47,27 +47,26 @@
                 </div>
                 @endif
 
+                <h class="btn-info btn-icon-split btn-sm">
+                    <span class="icon text-white-50"><i class="bi bi-tag-fill"></i></span>
+                    <span class="text">{{ $trd->category->name }}</span>
+                </h>
+                <h class="btn-success btn-icon-split btn-sm">
+                    <span class="icon text-white-50"><i class="bi bi-wallet2"></i></span>
+                    <span class="text">{{ $trd->wallet->name }}</span>
+                </h>
                 
                 <div class="text-secondary">code:</div>
                 <div class="text-warning mb-2">#{{ $trd->code }}</div>
-                <div class="text-secondary">category:</div>
-                <div class="text-warning mb-2">{{ $trd->category->name }}</div>
-                <div class="text-secondary">wallet:</div>
-                <div class="text-warning mb-2">{{ $trd->wallet->name }}</div>
                 <div class="text-secondary">amount:</div>
-                <div class="text-warning mb-2">{{ $trd->decimal }}</div>
+                <div class="text-warning mb-2">Rp. {{ number_format($trd->amount,'0', ',', '.') }}</div>
                 <div class="text-secondary">transaction date:</div>
                 <div class="text-warning mb-2">{{ $trd->date }}</div>
                 <div class="text-secondary">description:</div>
                 <div class="text-warning mb-2">{{ $trd->description }}</div>
-                <div class="text-secondary">create at:</div>
-                <div class="text-warning mb-2">{{ $trd->created_at }}</div>
-                <div class="text-secondary">update at:</div>
-                <div class="text-warning mb-2">{{ $trd->updated_at }}</div>
-
-                
             </div>
-
+            <hr>
+            create at: {{ $trd->created_at }} <h class="float-right">update at: {{ $trd->updated_at }}</h>
             </div>
         </div>
     </div>
@@ -89,7 +88,7 @@
                 <div class="modal-body">Select "delete" to delete data!</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="/transaction/{{ $trd->id }}" method="POST"> 
+                    <form action="/transaction/{{ $trd->slug }}" method="POST"> 
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">delete</button>

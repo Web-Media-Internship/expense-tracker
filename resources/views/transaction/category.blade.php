@@ -34,7 +34,7 @@
             @foreach($ctg as $post)
             <li class="list-group-item col-xl-8 col-lg-4">
                 {{ $post->name }}
-                <a href="/category/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-3">
+                <a href="/category/{{ $post->slug }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-3">
                     <span class="text dark">Detail</span>
                     <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
                 </a>
@@ -69,7 +69,7 @@
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name">
+                            id="name" placeholder="name" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>

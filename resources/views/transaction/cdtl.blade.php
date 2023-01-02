@@ -82,12 +82,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form method="POST" action="/category/{{ $ctgs->id }}">
+                <form method="POST" action="/category/{{ $ctgs->slug }}">
                     @method('put')
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name', $ctgs->name) }}">
+                            id="name" placeholder="name" value="{{ old('name', $ctgs->name) }}" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -161,7 +161,7 @@
                 <div class="modal-body">Select "delete" to delete data!</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="/category/{{ $ctgs->id }}" method="POST"> 
+                    <form action="/category/{{ $ctgs->slug }}" method="POST"> 
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">delete</button>

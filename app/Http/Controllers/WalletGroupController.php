@@ -6,6 +6,7 @@ use App\Models\Wallet;
 use App\Models\WalletGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class WalletGroupController extends Controller
 {
@@ -45,7 +46,21 @@ class WalletGroupController extends Controller
             'is_active' => 'required'
         ]);
 
+        $slug = md5($request->name);
+
+        $mi = DB::table('wallet_groups')->select(DB::raw('MAX(id) as kode'));
+        if($mi->count()>0)
+        {
+            foreach($mi->get() as $k)
+            {
+                $id = ((int) $k->kode) + 1;
+            }
+        }else{
+            $id = "1";
+        }
+
         $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['slug'] = date('s').$id.$slug.date('hi');
 
         WalletGroup::create($validatedData);
 

@@ -31,7 +31,7 @@ class forgotPasswordController extends Controller
             return back()->with('logerror', 'e-mail not registered');
         }
 
-        $mi = DB::table('fpas')->select(DB::raw('MAX(RIGHT(id,1)) as kode'));
+        $mi = DB::table('fpas')->select(DB::raw('MAX(id) as kode'));
         if($mi->count()>0)
         {
             foreach($mi->get() as $k)

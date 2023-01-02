@@ -1,10 +1,6 @@
 @extends('layouts.head')
 
 @section('container')
-<a href="/walletgroup" class="btn btn-primary btn-icon-split btn-sm mb-1">
-    <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
-    <span class="text">Back</span>
-</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-dark"> {{ $wlt->name }} </h5>
@@ -16,10 +12,9 @@
                 @endif
             </div>
             
-            <a href="" class="btn btn-info btn-icon-split btn-sm" data-toggle="modal" 
-            data-target="#detailwg">
-                <span class="icon text-white-50"><i class="bi bi-eye"></i></span>
-                <span class="text">Detail</span>
+            <a href="/walletgroup" class="btn btn-primary btn-icon-split btn-sm mb-1">
+                <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
+                <span class="text">back</span>
             </a>
             <a href="" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" 
             data-target="#editwg">
@@ -54,32 +49,36 @@
                 @endif
 
 
-                <a href="#" data-toggle="modal" data-target="#createwl">
-                    <div class=""><i class="bi bi-plus-circle"></i> Add Wallet</div>
-                </a>
+                <div class="row col-lg-8 mb-4">
+                    <a href="#" data-toggle="modal" data-target="#createwl">
+                        <div class=""><i class="bi bi-plus-circle"></i> Add Wallet</div>
+                    </a>
 
-                <div class="table-responsive">
-                <ul class="list-group">
-                    @foreach($wl as $post)
-                    <li class="list-group-item col-xl-8 col-lg-4">
-                        {{ $post->name }}
-                        <a href="/wallet/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-3">
-                            <span class="text dark">Detail</span>
-                            <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
-                        </a>
-                        @if($post->is_active == 1 )
-                        <a class="btn-warning btn-icon-split btn-sm float-right ml-1">
-                            <span class="text dark">active</span>
-                        </a>
-                        @else
-                        <a class="btn-danger btn-icon-split btn-sm float-right ml-1">
-                            <span class="text dark">non active</span>
-                        </a>
-                        @endif
-                    </li>
-                    @endforeach
-                    </tbody>
-                </table>
+                    <div class="table-responsive">
+                    <ul class="list-group">
+                        @foreach($wl as $post)
+                        <li class="list-group-item">
+                            {{ $post->name }}
+                            <a href="/wallet/{{ $post->slug }}" class="btn btn-secondary btn-icon-split btn-sm float-right ml-3">
+                                <span class="text dark">Detail</span>
+                                <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                            </a>
+                            @if($post->is_active == 1 )
+                            <a class="btn-warning btn-icon-split btn-sm float-right ml-1">
+                                <span class="text dark">active</span>
+                            </a>
+                            @else
+                            <a class="btn-danger btn-icon-split btn-sm float-right ml-1">
+                                <span class="text dark">non active</span>
+                            </a>
+                            @endif
+                        </li>
+                        @endforeach
+                    </ul>
+                    </div>
+                </div>
+                <hr class="sidebar-divider">
+                create at: {{ $wlt->created_at }} <h class="float-right">update at: {{ $wlt->updated_at }}</h>
             </div>
 
             </div>
@@ -103,7 +102,7 @@
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name') }}">
+                            id="name" placeholder="name" value="{{ old('name') }}" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -136,38 +135,6 @@
     </div>
 
 
-    <!-- detail -->
-    <div class="modal fade" id="detailwg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Wallet Group</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    
-                    <div class="text-secondary">wallet group name:</div>
-                    <div class="text-warning">{{ $wlt->name }}</div>
-                    <div>
-                        <div class="text-secondary">create at:</div>
-                        <div class="text-warning">{{ $wlt->created_at }}</div>
-                    </div>
-                    <div>
-                        <div class="text-secondary">update at:</div>
-                        <div class="text-warning">{{ $wlt->updated_at }}</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" data-dismiss="modal">close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- edit modal -->
     <div class="modal fade" id="editwg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -180,12 +147,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form method="POST" action="/walletgroup/{{ $wlt->id }}">
+                <form method="POST" action="/walletgroup/{{ $wlt->slug }}">
                     @method('put')
                     @csrf
                     <div>
                         <input name="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror"
-                            id="name" placeholder="name" value="{{ old('name', $wlt->name) }}">
+                            id="name" placeholder="name" value="{{ old('name', $wlt->name) }}" autocomplete="off">
                         @error('name')
                         <div class="text-danger ml-2">
                             <small>{{ $message }}</small>
@@ -249,7 +216,7 @@
                 <div class="modal-body">Select "delete" to delete data!</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="/walletgroup/{{ $wlt->id }}" method="POST"> 
+                    <form action="/walletgroup/{{ $wlt->slug }}" method="POST"> 
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">delete</button>
