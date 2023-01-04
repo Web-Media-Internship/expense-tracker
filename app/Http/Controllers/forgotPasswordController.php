@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class forgotPasswordController extends Controller
@@ -65,17 +66,32 @@ class forgotPasswordController extends Controller
         return back()->with('success', 'Password reset link has been sent to your email!');
     }
     
-    public function edit(fpas $fpas)
+    public function edit($fpas)
     {
-        if(Carbon::now() > $fpas->expired_at)
+
+        $fps = Fpas::where('code', $fpas);
+        
+        if(!$fps->count()>0){
+            if(Auth::check()) {
+                return redirect('/update-password')->with('logerror', "Resend your email, and we'll give you a new link");
+            }
+            return redirect('/forgot-password')->with('success', "Resend your email, and we'll give you a new link");
+        }
+
+        
+        foreach ($fps->get() as $key) {
+            $fp = $key;
+        }
+        
+        if(Carbon::now() > $fp->expired_at)
         {
-            Fpas::destroy($fpas->id);
-            return back();
+            Fpas::destroy($fp->id);
+            return redirect('/forgot-password')->with('success', "Your password reset link has expired");
         }
         
         return view('fpass.reset', [
             "title" => "Reset Password",
-            "fpas" => $fpas,
+            "fpas" => $fp,
             "nm" => "Reset Password?"
         ]);
     }

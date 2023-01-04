@@ -2,9 +2,9 @@
 
 @section('container')
     @if(session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert" aria-hidden="true">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" aria-hidden="true">
+        {{ session('success') }}
+    </div>
     @endif
     <div class="text-center">
         <p class="mb-4">Enter your email and we'll send you a code to reset your password!</p>
