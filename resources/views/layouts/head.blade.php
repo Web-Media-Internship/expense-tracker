@@ -11,6 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/img/icon.png') }}"
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -23,6 +24,7 @@
     <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/form-fiture.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -46,7 +48,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Request::is('/*') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('/*', 'month*') ? 'active' : '' }}">
                 <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Dashboard</span></a>
@@ -186,6 +188,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('template/js/demo/datatables-demo.js') }}"></script>
+    
 
 </body>
 

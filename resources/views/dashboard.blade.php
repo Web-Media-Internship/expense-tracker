@@ -20,13 +20,7 @@
                 <div class="dropdown-menu dropdown-menu-right animated--grow-in"
                     aria-labelledby="navbarDropdown">
                       @foreach($mlink as $mn)
-                      <div>
-                        <form method="POST" action="/">
-                          @csrf
-                          <input type="hidden" value="{{ $mn->bln }}" name="bulan">
-                          <button type="submit" class="btn">{{ $mn->bln }}</button>
-                        </form>
-                      </div>
+                      <a class="dropdown-item" href="/month/{{ $mn->bln }}">{{ $mn->bln }}</a>
                       @endforeach
                 </div>
             </li>

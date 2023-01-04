@@ -20,20 +20,16 @@
             <div class="dropdown-menu dropdown-menu-right animated--grow-in"
             aria-labelledby="navbarDropdown">
               @foreach($mlink as $mn)
-              <div>
-                <form method="POST" action="/">
-                  @csrf
-                  <input type="hidden" value="{{ $mn->bln }}" name="bulan">
-                  <button type="submit" class="btn">{{ $mn->bln }}</button>
-                </form>
-              </div>
+                <a class="dropdown-item" href="/month/{{ $mn->bln }}">{{ $mn->bln }}</a>
               @endforeach
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/">Back to Dashboard</a>
             </div>
           </li>
         </ul>
       </nav>
       <hr>
-      <table class="mb-3" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered mb-3" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th>Name</th>
@@ -55,7 +51,7 @@
               @endif
             </td>
             <td>
-            <a href="/transaction/{{ $post->id }}" class="btn btn-secondary btn-icon-split btn-sm mb-1">
+            <a href="/transaction/{{ $post->slug }}" class="btn btn-secondary btn-icon-split btn-sm mb-1">
               <span class="text dark">Detail</span>
               <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
             </a>

@@ -12,7 +12,7 @@
                 @endif
             </div>
             
-            <a href="/walletgroup/{{ $wlt->wallet_group_id }}" class="btn btn-primary btn-icon-split btn-sm">
+            <a href="/walletgroup/{{ $group }}" class="btn btn-primary btn-icon-split btn-sm">
                 <span class="icon text-white-50"><i class="bi bi-arrow-left-short"></i></span>
                 <span class="text">Back</span>
             </a>

@@ -10,18 +10,19 @@
             </a>
         </div>
         <div class="card-body">
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show col-xl-6 col-lg-4" data-toggle="alert">
+                {{ session('success') }}
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            @endif
+            <a href="/transaction/create">
+                <div class=""><i class="bi bi-plus-circle"></i> create new Transaction</div>
+            </a>
+            <hr>
             <div class="table-responsive">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show col-xl-6 col-lg-4" data-toggle="alert">
-                    {{ session('success') }}
-                    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                @endif
-                <a href="/transaction/create">
-                    <div class=""><i class="bi bi-plus-circle"></i> create new Transaction</div>
-                </a>
                 <table class="table table-bordered mb-3" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -53,13 +54,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                <hr class="sidebar-divider">
-                <div class="col-xl-10 col-lg-4 small">
-                    <h class="float-right">{{ $trn->links() }}</h>
-                </div>
             </div>
         </div>
     </div>
-    
     
 @endsection

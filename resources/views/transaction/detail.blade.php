@@ -20,7 +20,7 @@
                 <span class="icon text-white-50"><i class="bi bi-pencil"></i></span>
                 <span class="text">Edit</span>
             </a>
-            <a href="" class="btn btn-danger btn-icon-split btn-sm" data-toggle="modal" 
+            <a href="" class="btn btn-danger btn-icon-split btn-sm ml-1" data-toggle="modal" 
             data-target="#delModal">
                 <span class="icon text-white-50"><i class="bi bi-trash3"></i></span>
                 <span class="text">delete</span>

@@ -80,10 +80,17 @@ class WalletController extends Controller
     public function show(Wallet $wallet)
     {
         Session::put('wl', request()->fullUrl());
+
+
+        $group = WalletGroup::where('id', $wallet->wallet_group_id)->get();
+        foreach ($group as $key) {
+            $slug = $key->slug;
+        }
         
         return view('walletgroup.wld', [
             'wlt' => $wallet,
-            'title' => "Wallet detail"
+            'title' => "Wallet detail",
+            'group' =>  $slug
         ]);
     }
 

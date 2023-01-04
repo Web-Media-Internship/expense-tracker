@@ -43,7 +43,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function month()
+    public function month($month)
     {
         
         $mn = Transaction::select(DB::raw("MONTHNAME(date) as bln"))
@@ -53,17 +53,17 @@ class DashboardController extends Controller
             ->where('mutation', 0)
             ->get('bln');
             
-        $tr = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+        $tr = Transaction::where(DB::raw('monthname(date)'), $month)
             ->get();
 
-        $m = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+        $m = Transaction::where(DB::raw('monthname(date)'), $month)
             ->select(DB::raw("SUM(mutation) as mt"))
             ->where('user_id', auth()->user()->id)
             ->GroupBy("mutation")
             ->OrderBy("mutation")
             ->get('mt');
             
-        $t = Transaction::where(DB::raw('monthname(date)'), request('bulan'))
+        $t = Transaction::where(DB::raw('monthname(date)'), $month)
             ->select(DB::raw("SUM(amount) as total"))
             ->where('user_id', auth()->user()->id)
             ->GroupBy("mutation")
@@ -77,7 +77,7 @@ class DashboardController extends Controller
             "mt" => $m,
             "tl" => $t,
             "trn" => $tr,
-            "m" => request('bulan')
+            "m" => $month
         ]);
     }
 }

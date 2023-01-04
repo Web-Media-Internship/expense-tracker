@@ -41,7 +41,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 //dashboard route
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
-Route::post('/', [DashboardController::class, 'month'])->middleware('auth');
+Route::get('/month/{month}', [DashboardController::class, 'month'])->middleware('auth');
 
 
 //transaction route

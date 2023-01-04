@@ -32,7 +32,7 @@ class TransactionController extends Controller
 
         return view('transaction.trsn', [
             "title" => "Transaction",
-            "trn" => Transaction::where('user_id', auth()->user()->id)->paginate(10),
+            "trn" => Transaction::where('user_id', auth()->user()->id)->get(),
         ]);
     }
 
@@ -69,7 +69,7 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'amount' => 'required|max:9',
+            'amount' => 'required|max:15',
             'date' => 'required',
             'description' => 'required|max:100'
         ]);
@@ -153,10 +153,11 @@ class TransactionController extends Controller
             'category_id' => 'required',
             'wallet_id' => 'required',
             'mutation' => 'required',
-            'amount' => 'required|max:9',
+            'amount' => 'required|max:15',
             'date' => 'required',
             'description' => 'required|max:100'
         ]);
+        $validatedData['amount'] = preg_replace("/[^0-9]/", "", $validatedData['amount']);
         $ti = [$transaction->id];
         Transaction::where('id', $ti)->update($validatedData);
         

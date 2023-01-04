@@ -15,7 +15,7 @@ class Wallet extends Model
         return 'slug';
     }
     
-    public function walletgroup()
+    public function group()
     {
         return $this->belongsTo(WalletGroup::class);
     }
